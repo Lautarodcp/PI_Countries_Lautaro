@@ -1,10 +1,33 @@
 import './App.css';
+import {BrowserRouter, Route} from "react-router-dom";
+import Landig from './components/LandingPage/LandingPage';
+import Home from './components/Home/Home';
+import Detail from './components/Detail/Detail';
+import CreateTour from './components/CreateTour/CreateTour';
+import Nav from './components/Nav/Nav';
+
 
 function App() {
   return (
+    <BrowserRouter>
     <div className="App">
-      <h1>Henry Countries</h1>
+      <Route exact path="/">
+        <Landig/>
+      </Route>
+      <Route exact path="/home/nav">
+        <Nav/>
+      </Route>
+      <Route exact path="/home">
+        <Home/>
+      </Route>
+      <Route path="/home/detail">
+        <Detail/>
+      </Route>
+      <Route exact path="/home/create">
+        <CreateTour/>
+      </Route>
     </div>
+    </BrowserRouter>
   );
 }
 

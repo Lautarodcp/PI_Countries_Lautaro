@@ -1,0 +1,22 @@
+.crear {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    align-items: center;
+}
+
+.formulario {
+    border: 2px solid black;
+    height: 200px;
+    width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputTour {
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+}
