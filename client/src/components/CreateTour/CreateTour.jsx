@@ -1,14 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./CreateTour.css";
 import {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { getCountries, getTours, postTour } from "../../redux/actions/index"
+import { getCountries, getTours, postTour} from "../../redux/actions/index"
 
 const CreateTour = ()=> {
 
     const dispatch = useDispatch();
     const allCountries = useSelector(state=>state.countries);
     const allTours = useSelector(state=>state.tours);
+    const orden = "az";
+    const alfabeticCountri= ordenar(allCountries,orden);
+   
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.substring(1);
+      };
 
     useEffect (()=> {dispatch(getCountries())}, [dispatch]);
     useEffect (()=> {dispatch(getTours())}, [dispatch]);
@@ -20,6 +27,31 @@ const CreateTour = ()=> {
         season: "",
         countries:[],
     });
+
+    const ordenar = (country, dato) => {
+        switch (dato) {
+            case "tod":
+                return country;
+            case "az": 
+            country.sort(function (a, b) {
+                let countrya = a.name.toUpperCase();
+                let countryb = b.name.toUpperCase();
+                if (countrya < countryb) {return -1};
+                if (countrya > countryb) {return 1};
+                return 0;
+            });
+                 return country;
+            case "za": 
+            country.sort(function (a, b) {
+                let countrya = a.name.toUpperCase();
+                let countryb = b.name.toUpperCase();
+                if (countrya < countryb) {return 1};
+                if (countrya > countryb) {return -1};
+                return 0;
+        });
+        return country;
+        };
+    };
 
     //VALIDAR NOMBRE TOUR
 
@@ -49,9 +81,25 @@ const CreateTour = ()=> {
     const changeSeason = (e) => {
         setForm ({...form, season: e.target.value});
     };
+    
+    const handlerSelectCountry = (e) => {
+        setForm({
+            ...form, 
+            countries: [...new Set ([...form.countries, e.target.value])]
+        })
+    };
+
+    const handlerDelete = (e) => {
+        setForm({
+            ...form,
+            countries: form.countries.filter (c=>
+                c!== e.target.value)
+        })
+    };
 
     const handlerSubmit = (e) =>{
        e.preventDefault();
+       console.log(form);
        dispatch(postTour(form));
        setForm({
         name:"",
@@ -60,9 +108,14 @@ const CreateTour = ()=> {
         season: "",
         countries:[],
        });
+       alert(`El tour ${form.name} fue creado con exito`);
     };
 
     return (
+        <div>
+        <Link to="/home">
+                <button>VOLVER A HOME</button>
+        </Link>
         <div className="crear">
             <h2>CREAR ACTIVIDAD</h2>
             <form className="formulario" onSubmit={handlerSubmit}>
@@ -82,8 +135,28 @@ const CreateTour = ()=> {
                     <label>Estacion: </label>
                     <input className="inputTour" value={form.season} key="season" type="text" onChange={changeSeason}/>
                 </div>
-                <button type="submit">CREAR TOUR</button>
+                <div>
+                    <label htmlFor="pais">Seleccione 1 o mas paises</label>
+                    <select id="pais" onChange={handlerSelectCountry}>
+                     {
+                        alfabeticCountri.map((c)=> 
+                             <option value={capitalizeFirstLetter(c.name)}> {capitalizeFirstLetter(c.name)} </option>
+                        )
+                     }
+                    </select>
+                    <div>
+                        {
+                            form.countries.map( c=>
+                                <div> {c}
+                                    <button value={c} onClick={handlerDelete}>X</button>
+                                 </div>
+                            )
+                        }
+                    </div>
+                </div>
+                <button type="submit" disable={!form.name || !form.difficulty || !form.duration || !form.season || !form.countries.length}  >CREAR TOUR</button>
             </form>
+        </div>
         </div>
     )
 };

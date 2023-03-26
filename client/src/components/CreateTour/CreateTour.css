@@ -7,7 +7,7 @@
 
 .formulario {
     border: 2px solid black;
-    height: 200px;
+    height: 400px;
     width: 300px;
     display: flex;
     flex-wrap: wrap;

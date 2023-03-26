@@ -8,11 +8,14 @@ import "./Card.css";
 // Continente.
 
 const Card = ({name, id, img, continent, population}) => {
+    
     const arrayStr = name.split(" ");
     for (let i=0; i<arrayStr.length; i++){
         arrayStr[i] = arrayStr[i].charAt(0).toUpperCase() + arrayStr[i].slice(1);
     }
     const nameMayu = arrayStr.join(" ");
+
+    if (name) {
     return (
         <div className="card">
                 <div className="flag">
@@ -23,7 +26,14 @@ const Card = ({name, id, img, continent, population}) => {
                 </Link>
                 <p> Continente: {continent} </p>
         </div>
-    )
+    )}
+    else {
+        return (
+            <div>
+                <p>Error, pais no encontrado</p>
+            </div>
+        )
+    }
 };
 
 export default Card;

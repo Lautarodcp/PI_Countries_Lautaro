@@ -33,14 +33,30 @@ const Detail = () => {
                 <div className="flag">
                 <img src={country.flag} alt="" />
                 </div>
-                <h2> {nameMayu} </h2>
-                <p>Id: {country.id} </p>
-                <p>Continente: {country.continent} </p>
-                <p>Capital: {country.capital} </p> 
-                <p>{country.subRegion?<p>Subregion:{country.subregion}</p>:<p>{null}</p>}</p>
-                <p>{country.area?<p>Area:{country.area}</p>:<p>{null}</p>}</p>
-                <p>Poblacion : {country.population} </p>
-                <p>Tours: {country.tours} </p>
+                <h1> {nameMayu} </h1>
+                <div className="info">
+                    <h3>Info del pais</h3>
+                    <p>Id: {country.id} </p>
+                    <p>Continente: {country.continent} </p>
+                    <p>Capital: {country.capital} </p> 
+                    <p>{country.subRegion?<p>Subregion:{country.subregion}</p>:<p>{null}</p>}</p>
+                    <p>{country.area?<p>Area:{country.area}</p>:<p>{null}</p>}</p>
+                    <p>Poblacion : {country.population} </p>
+                </div>
+                <div className="tours">
+                     <h3>Tours</h3>
+                     <p> {country.tours.length?
+                                    country.tours.map(tour => 
+                                    <div>
+                                        <p>Nombre: {tour.name}</p>
+                                        <p>Difficultad: {tour.difficulty}</p> 
+                                        <p>Duracion: {tour.duration}</p>
+                                        <p>Estacion: {tour.season}</p>
+                                    </div>):
+                                    <div>
+                                        <h4>No hay tours disponibles en este país</h4>
+                                    </div>}</p>
+                </div>
         </div>
         </div>
     )
