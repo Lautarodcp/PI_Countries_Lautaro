@@ -1,10 +1,10 @@
 .nav {
+    background-color: rgba(152, 181, 180, 0.833);
     margin: 2px;
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
-    border: 2px solid black;
-    height: 50px;
+    gap: 40px;
+    height: 30px;
     width: 100%;
     justify-content: center;
     align-items: center;

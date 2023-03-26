@@ -1,9 +1,9 @@
 .paginado{
-    border: 2px solid black;
-    height: 40px;
-    width: 100%;
+    background-color: rgba(152, 181, 180, 0.833);
+    height: 28px;
+    width: 50%;
     position: absolute;
-    bottom: 0;
+    bottom: 15px;
     z-index: 9999;
     justify-content: center;
     align-items: center;

@@ -7,6 +7,34 @@ import { getCountries, getTours, postTour} from "../../redux/actions/index"
 
 const CreateTour = ()=> {
 
+    const ordenar = (country, dato) => {
+        switch (dato) {
+            case "tod":
+                return country;
+            case "az": 
+            country.sort(function (a, b) {
+                let countrya = a.name.toUpperCase();
+                let countryb = b.name.toUpperCase();
+                if (countrya < countryb) {return -1};
+                if (countrya > countryb) {return 1};
+                return 0;
+            });
+                 break;
+            case "za": 
+            country.sort(function (a, b) {
+                let countrya = a.name.toUpperCase();
+                let countryb = b.name.toUpperCase();
+                if (countrya < countryb) {return 1};
+                if (countrya > countryb) {return -1};
+                return 0;
+        });
+        break;
+            default:
+                return 1;
+            };
+        return country;
+    };
+
     const dispatch = useDispatch();
     const allCountries = useSelector(state=>state.countries);
     const allTours = useSelector(state=>state.tours);
@@ -28,30 +56,7 @@ const CreateTour = ()=> {
         countries:[],
     });
 
-    const ordenar = (country, dato) => {
-        switch (dato) {
-            case "tod":
-                return country;
-            case "az": 
-            country.sort(function (a, b) {
-                let countrya = a.name.toUpperCase();
-                let countryb = b.name.toUpperCase();
-                if (countrya < countryb) {return -1};
-                if (countrya > countryb) {return 1};
-                return 0;
-            });
-                 return country;
-            case "za": 
-            country.sort(function (a, b) {
-                let countrya = a.name.toUpperCase();
-                let countryb = b.name.toUpperCase();
-                if (countrya < countryb) {return 1};
-                if (countrya > countryb) {return -1};
-                return 0;
-        });
-        return country;
-        };
-    };
+    
 
     //VALIDAR NOMBRE TOUR
 
@@ -99,7 +104,6 @@ const CreateTour = ()=> {
 
     const handlerSubmit = (e) =>{
        e.preventDefault();
-       console.log(form);
        dispatch(postTour(form));
        setForm({
         name:"",
@@ -140,14 +144,14 @@ const CreateTour = ()=> {
                     <select id="pais" onChange={handlerSelectCountry}>
                      {
                         alfabeticCountri.map((c)=> 
-                             <option value={capitalizeFirstLetter(c.name)}> {capitalizeFirstLetter(c.name)} </option>
+                             <option value={c.name}> {capitalizeFirstLetter(c.name)} </option>
                         )
                      }
                     </select>
                     <div>
                         {
                             form.countries.map( c=>
-                                <div> {c}
+                                <div> {capitalizeFirstLetter(c)}
                                     <button value={c} onClick={handlerDelete}>X</button>
                                  </div>
                             )

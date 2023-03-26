@@ -5,8 +5,8 @@ import "./Pagination.css"
 const Pagination = ({countryPerPage, allCountry, paginado}) =>{
     const pageNumbers = [];
 
-    for (let i=0; i<= Math.ceil(allCountry/countryPerPage); i++){
-        pageNumbers.push(i + 1 ); //recorro y guardo los numeros para saber cantidad de paginas
+    for (let i=1; i<= Math.ceil(allCountry/countryPerPage); i++){
+        pageNumbers.push(i); //recorro y guardo los numeros para saber cantidad de paginas
     };
 
     return (

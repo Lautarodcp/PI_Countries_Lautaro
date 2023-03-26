@@ -21,7 +21,7 @@ const Card = ({name, id, img, continent, population}) => {
                 <div className="flag">
                 <img src={img} alt="" />
                 </div>
-                <Link to={`/home/detail/${id}`}>
+                <Link className="pais" to={`/home/detail/${id}`}>
                 <h2> {nameMayu} </h2>
                 </Link>
                 <p> Continente: {continent} </p>

@@ -11,7 +11,7 @@ const Detail = () => {
 
     useEffect (()=> {
         dispatch(getCountries())
-    }, []);
+    }, [dispatch]);
 
     const url = window.location.href;
     const id = url.substring(34)

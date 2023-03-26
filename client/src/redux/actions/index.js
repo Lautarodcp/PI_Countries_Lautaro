@@ -6,6 +6,7 @@ export const POST_TOUR = "POST_TOUR";
 export const FILTER_BY_CONTINENTE = "FILTER_BY_CONTINENTE";
 export const FILTER_ALFABETICO = "FILTER_ALFABETICO";
 export const FILTER_TOURS = "FILTER_TOURS";
+export const FILTER_POBLACION = "FILTER_POBLACION"
 
 
 export function getCountries () {
@@ -70,6 +71,13 @@ export function filterAlfabetico (payload) {
 export function filterByTours (payload) {
     return {
         type: FILTER_TOURS,
+        payload: payload
+    }
+};
+
+export function filterByPoblacion (payload) {
+    return {
+        type: FILTER_POBLACION,
         payload: payload
     }
 };

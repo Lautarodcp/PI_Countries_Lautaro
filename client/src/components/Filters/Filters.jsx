@@ -10,7 +10,7 @@ const Filter = () =>{
 
     useEffect (()=> {
         dispatch(getTours())
-    }, []);
+    }, [dispatch]);
 
     const handlerFilterContinent = (e) =>{
         dispatch (filterByContinente(e.target.value))
@@ -24,19 +24,20 @@ const Filter = () =>{
         dispatch (filterAlfabetico (e.target.value))
     } ;
     return (
-        <div>
-                <label htmlFor="alfabetico">Orden alfabetico</label>
+        <div className="filter">
+                <label htmlFor="alfabetico">Orden alfabetico:</label>
                 <select id="alfabetico" onChange={handlerFilterAlfabetico}>
                     <option value="tod">Seleccionar</option>
                     <option value="az">A-Z</option>
                     <option value="za">Z-A</option>
                 </select>
-                <label htmlFor="poblacion">Pablacion</label>
+                <label htmlFor="poblacion">Pablacion:</label>
                 <select id="poblacion">
-                    <option value="menor">Menor a Mayor</option>
-                    <option value="mayor">Mayor a Menor</option>
+                    <option value="tod">Seleccionar</option>
+                    <option value="az">Menor a Mayor</option>
+                    <option value="za">Mayor a Menor</option>
                 </select>
-                <label htmlFor="continente">Continente</label>
+                <label htmlFor="continente">Continente:</label>
                 <select id="continente" onChange={handlerFilterContinent}>
                     <option value="tod">Todos</option>
                     <option value="Africa">Africa</option>
@@ -47,7 +48,7 @@ const Filter = () =>{
                     <option value="South America">America del Sur</option>
                     <option value="Oceania">Oceania</option>
                 </select>
-                <label htmlFor="tours">Tours</label>
+                <label htmlFor="tours">Tours:</label>
                 <select id="tours" onChange={handlerFilterTours}>
                         <option value="sel">Seleccionar</option>
                         <option value="todos">Todos</option>

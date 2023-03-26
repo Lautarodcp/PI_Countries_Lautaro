@@ -94,21 +94,28 @@ const findCountriesbyId = (id, countries) => {
 
 //CREAR TOURS
 
-const addTourtoCountry = async (name,difficulty,duration,season, countries) =>{
-    console.log(name,difficulty,duration,season, countries);
-    let newTour = await Tours.create({
+const addTourtoCountry = async (name, difficulty, duration, season, countries) => {
+    try {
+      const newTour = await Tours.create({
         name,
         difficulty,
         duration,
         season,
-    });
-   const filter = await Country.findAll({
+      });
+  
+      const filter = await Country.findAll({
         where: {
-                name: countries,
-          },
-    });
-    await newTour.addCountry(filter);
-};
+          name: countries,
+        },
+      });
+  
+      filter.forEach(async (country) => {
+        await newTour.addCountry(country, { through: "country_tours" });
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 //BORRAR TOURS
 

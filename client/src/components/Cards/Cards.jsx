@@ -22,7 +22,11 @@ const Cards = () => {
 
     useEffect (()=> {
         dispatch(getCountries())
-    }, []);
+    }, [dispatch]);
+
+    useEffect(() => {
+        setCurrentPage(1); // reiniciar la página actual cuando cambie el país actual
+    }, [currentCountry]);
     
     return(
         <div className="cards">

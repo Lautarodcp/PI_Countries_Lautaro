@@ -1,4 +1,6 @@
 .home{
     display: flex;
     flex-wrap: wrap;
+    background-image: url("https://fondosmil.com/fondo/71504.jpg");
+    z-index: 0;
 }
