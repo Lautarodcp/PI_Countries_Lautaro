@@ -116,12 +116,12 @@ const CreateTour = ()=> {
     };
 
     return (
-        <div>
+        <div className="todo">
         <Link to="/home">
                 <button>VOLVER A HOME</button>
         </Link>
         <div className="crear">
-            <h2>CREAR ACTIVIDAD</h2>
+            <h2 >CREAR ACTIVIDAD</h2>
             <form className="formulario" onSubmit={handlerSubmit}>
                 <div>
                     <label>Nombre: </label>
@@ -148,17 +148,17 @@ const CreateTour = ()=> {
                         )
                      }
                     </select>
-                    <div>
+                    <div className={form.countries.length?"oki":null}>
                         {
                             form.countries.map( c=>
-                                <div> {capitalizeFirstLetter(c)}
-                                    <button value={c} onClick={handlerDelete}>X</button>
+                                <div className="selec"> {capitalizeFirstLetter(c)}
+                                    <button className="botonX" value={c} onClick={handlerDelete}>X</button>
                                  </div>
                             )
                         }
                     </div>
                 </div>
-                <button type="submit" disable={!form.name || !form.difficulty || !form.duration || !form.season || !form.countries.length}  >CREAR TOUR</button>
+                <button className="btnEnviar" type="submit" disable={!form.name || !form.difficulty || !form.duration || !form.season || !form.countries.length}>CREAR TOUR</button>
             </form>
         </div>
         </div>

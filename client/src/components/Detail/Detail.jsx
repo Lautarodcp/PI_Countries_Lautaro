@@ -25,11 +25,11 @@ const Detail = () => {
     const nameMayu = arrayStr.join(" ");
     console.log(country);
     return (
-        <div>
+        <div className="detail">
             <Link to="/home">
                 <button>VOLVER A HOME</button>
             </Link>
-        <div className="detail">
+        <div className="card">
                 <div className="flag">
                 <img src={country.flag} alt="" />
                 </div>

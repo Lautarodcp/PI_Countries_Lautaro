@@ -1,22 +1,84 @@
-.crear {
+.todo{
+    background-image: url("https://fondosmil.com/fondo/71504.jpg");
+    background-size: cover;
+    height: 100vh; /*para que ocupe el 100% de la pantalla*/
+    font-family: 'Roboto', sans-serif; /* Agregar una fuente de Google Fonts */
+  }
+  
+  .crear {
     display: flex;
     flex-direction: column;
     margin: 5px;
     align-items: center;
-}
-
-.formulario {
+  }
+  
+  .formulario {
+    background-color: rgba(152, 181, 180, 0.833);
     border: 2px solid black;
-    height: 400px;
-    width: 300px;
+    border-radius: 10px; /* Agregar un borde redondeado al contenedor */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Agregar un sombreado */
+    max-height: 400px;
+    width: 400px;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-}
-
-.inputTour {
+    flex-direction: column;
+    padding: 20px; /* Agregar un margen */
+  }
+  
+  .inputTour {
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
     outline: none;
-}
+    margin-bottom: 10px; /* Agregar un margen inferior */
+    transition: border 0.3s; /* Agregar una transición para el borde */
+  }
+  
+  .inputTour:focus {
+    border-bottom: 2px solid #2ecc71; /* Cambiar el borde al campo de entrada activo */
+  }
+  
+  .btnEnviar {
+    background-color: #2ecc71; /* Agregar un color de fondo al botón */
+    border: none;
+    border-radius: 20px; /* Agregar un borde redondeado al botón */
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin-top: 20px; /* Agregar un margen superior */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Agregar una transición para el color de fondo */
+  }
+  
+  .btnEnviar:hover {
+    background-color: #27ae60; /* Cambiar el color de fondo al pasar el mouse */
+  }
+
+  .selec{
+    border: 1px solid black;
+    background-color: rgba(129, 147, 146, 0.833);
+    margin: 1px;
+    font-size: 20px;
+    position: relative;
+  }
+  .selec:hover{
+    background-color: rgba(199, 223, 221, 0.833);
+  }
+
+  .botonX{
+    font-size: 10px;
+    margin: 3px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+
+  .oki{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+  }
+
+  .h2{
+    background-color: #2ecc71;
+  }

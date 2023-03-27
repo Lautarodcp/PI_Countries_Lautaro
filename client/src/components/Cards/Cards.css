@@ -6,3 +6,14 @@
     align-items: center;
     padding-bottom: 55px;
 }
+
+.error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid black;
+}
+
+.titulo{
+    font-weight: 800;
+}

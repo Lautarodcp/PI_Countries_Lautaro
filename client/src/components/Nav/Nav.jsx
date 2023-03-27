@@ -17,10 +17,10 @@ const Nav = () =>{
     return (
         <div className="nav">
             <Link className="elemento" to="/home/create" >
-                <button>CREAR TOUR</button>
+                <button className="bot" >CREAR TOUR</button>
             </Link>
             <Link className="elemento" to="/home" >
-                <button onClick={ e=>{handlerRefresh(e)}}>CARGAR TODOS</button>
+                <button className="bot" onClick={ e=>{handlerRefresh(e)}}>CARGAR TODOS</button>
             </Link>
             <Filter/>
             <SearchBar/>

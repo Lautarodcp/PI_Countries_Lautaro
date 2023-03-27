@@ -32,7 +32,7 @@ const SearchBar = () => {
     };
     return (
         <div className="searchbar">
-            <button type="submit" onClick={clickHandler}>Buscar</button>
+            <button className="bot" type="submit" onClick={clickHandler}>Buscar</button>
             <input type="text" onChange={inputHandler} value={input} />
         </div>
     )

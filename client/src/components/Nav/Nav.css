@@ -8,4 +8,11 @@
     width: 100%;
     justify-content: center;
     align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.bot{
+    font-size: 15px;
+    font-weight: 600;
 }

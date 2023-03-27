@@ -24,10 +24,7 @@ const Cards = () => {
         dispatch(getCountries())
     }, [dispatch]);
 
-    useEffect(() => {
-        setCurrentPage(1); // reiniciar la página actual cuando cambie el país actual
-    }, [currentCountry]);
-    
+    if (currentCountry.length!=0) {    
     return(
         <div className="cards">
             {
@@ -48,7 +45,13 @@ const Cards = () => {
                 paginado={paginado}
             />
         </div>
-    )
+    )} else {
+        return(
+            <div className="error">
+                <h2 className="titulo">NO HAY PAISES, VUELVA A CARGAR TODOS</h2>
+            </div>
+        )
+    };
 };
 
 export default Cards;

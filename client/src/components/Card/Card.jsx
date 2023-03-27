@@ -24,7 +24,7 @@ const Card = ({name, id, img, continent, population}) => {
                 <Link className="pais" to={`/home/detail/${id}`}>
                 <h2> {nameMayu} </h2>
                 </Link>
-                <p> Continente: {continent} </p>
+                <p className="continente">{continent} </p>
         </div>
     )}
     else {
