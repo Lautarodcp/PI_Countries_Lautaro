@@ -86,8 +86,8 @@ const rootReducer = (state=initialState, action) => {
             allcountries.filter(c=> c.continent === action.payload)
             return {...state, countries:filterContinente};
         case FILTER_ALFABETICO:
-            let allCountriesAlfabetico = state.countries;
-            let countriesAlfabet = ordenar(allCountriesAlfabetico, action.payload)
+            let allCountriesAlfabetico = state.allcountries;
+            let countriesAlfabet = ordenar(allCountriesAlfabetico, action.payload);
             return {...state, countries: countriesAlfabet};
         case FILTER_POBLACION:
                 let allCountriesPoblacion = state.countries;

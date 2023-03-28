@@ -26,38 +26,44 @@ const Detail = () => {
     console.log(country);
     return (
         <div className="detail">
-            <Link to="/home">
-                <button>VOLVER A HOME</button>
-            </Link>
-        <div className="card">
-                <div className="flag">
-                <img src={country.flag} alt="" />
+                <Link to="/home">
+                    <button className="bthome">VOLVER A HOME</button>
+                </Link>
+            <div className="carta">
+                <div className="flaggContainer">
+                    <img src={country.flag} alt="" />
+                    <h1 className="countryname"> {nameMayu} </h1>
                 </div>
-                <h1> {nameMayu} </h1>
-                <div className="info">
-                    <h3>Info del pais</h3>
-                    <p>Id: {country.id} </p>
-                    <p>Continente: {country.continent} </p>
-                    <p>Capital: {country.capital} </p> 
-                    <p>{country.subRegion?<p>Subregion:{country.subregion}</p>:<p>{null}</p>}</p>
-                    <p>{country.area?<p>Area:{country.area}</p>:<p>{null}</p>}</p>
-                    <p>Poblacion : {country.population} </p>
-                </div>
-                <div className="tours">
-                     <h3>Tours</h3>
-                     <p> {country.tours.length?
-                                    country.tours.map(tour => 
-                                    <div>
-                                        <p>Nombre: {tour.name}</p>
-                                        <p>Difficultad: {tour.difficulty}</p> 
-                                        <p>Duracion: {tour.duration}</p>
-                                        <p>Estacion: {tour.season}</p>
-                                    </div>):
-                                    <div>
-                                        <h4>No hay tours disponibles en este país</h4>
-                                    </div>}</p>
-                </div>
-        </div>
+                 <div className="dataContainer">
+                    <div className="info">
+                         <h1>Informacion del pais</h1>
+                            <p className="pimport"><strong>ID:</strong> {country.id} </p>
+                            <p className="pimport"><strong>CONTINENTE:</strong> {country.continent} </p>
+                            <p className="pimport">{country.capital?<p><strong>CAPITAL:</strong> {country.capital}</p>:<p>Capital: No hay informacion</p>}</p> 
+                            <p className="pimport">{country.subRegion?<p><strong>SUBREGION:</strong> {country.subregion}</p>:<p><strong>SUBREGION:</strong> No hay informacion</p>}</p>
+                            <p className="pimport">{country.area?<p><strong>AREA:</strong> {country.area} Km2</p>:<p>Area: No hay informacion</p>}</p>
+                            <p className="pimport"><strong>POBLACION:</strong> {country.population} personas</p>
+                    </div>
+                    <div className="tours">
+                        <h1>Tours</h1>
+                            <p> {
+                                    country.tours.length?
+                                        country.tours.map(tour => 
+                                            <div className={country.tours.length>1?"minitours":null}>
+                                                <p className="pimport"><strong>NOMBRE:</strong> {tour.name}</p>
+                                                <p className="pimport"><strong>DIFICULTAD:</strong> {tour.difficulty}</p> 
+                                                <p className="pimport"><strong>DURACION:</strong> {tour.duration}</p>
+                                                <p className="pimport"><strong>ESTACION:</strong> {tour.season}</p>
+                                            </div>
+                                        ):
+                                        <div>
+                                            <h4>No hay tours disponibles en este país</h4>
+                                        </div>
+                                }
+                            </p>
+                    </div>
+                 </div>
+            </div>
         </div>
     )
 };

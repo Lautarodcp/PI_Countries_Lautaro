@@ -40,6 +40,8 @@ const CreateTour = ()=> {
     const allTours = useSelector(state=>state.tours);
     const orden = "az";
     const alfabeticCountri= ordenar(allCountries,orden);
+    const difficulties = ["1", "2", "3", "4","5"];
+    const season = ["verano", "otoño", "invierno", "primavera"];
    
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.substring(1);
@@ -56,23 +58,27 @@ const CreateTour = ()=> {
         countries:[],
     });
 
+    const [errors, setErrors] = useState({name:""});
     
 
     //VALIDAR NOMBRE TOUR
 
-    const validate = (form) =>{
-        let constante = "/^[A-Za-z]+$/";
-        let error={};
-        let repeated = allTours.name.filter(name => name === form.name);
-
-        if (!form.name) error.name ="Es necesario ingresar un nombre";
-        else if (repeated.length) error.name = "El tour ya fue creado";
-        else if (!constante.test(form.name)) error.name="El nombre del tour no es valido, no se permiten simbolos, espacios o numeros";
-        return error;
+    const validate=(form)=>{
+        let errors={};
+        let name_repeated = allTours.filter(t => t.name === form.name);
+        const constante = (/^[A-Za-z]+$/);
+        if(!form.name) errors.name="Es necesario ingresar un nombre";
+        else if(name_repeated.length) errors.name=`El tour ${form.name} ya fue creado`;
+        else if(!constante.test(form.name))
+        errors.name="El nombre del tour no es valido, no se permiten simbolos, espacios o numeros";
+        return errors;
     }
+
     //Manejadores
     const changeName = (e) => {
-        setForm ({...form, name:e.target.value});
+        let value = e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1);
+        setForm ({...form, name:value});
+        setErrors (validate({...form, name:value}));
     };
 
     const changeDifficulty = (e) => {
@@ -103,7 +109,7 @@ const CreateTour = ()=> {
     };
 
     const handlerSubmit = (e) =>{
-       e.preventDefault();
+        e.preventDefault();
        dispatch(postTour(form));
        setForm({
         name:"",
@@ -113,31 +119,54 @@ const CreateTour = ()=> {
         countries:[],
        });
        alert(`El tour ${form.name} fue creado con exito`);
+       window.location.href = 'http://localhost:3000/home/create';
     };
 
     return (
         <div className="todo">
         <Link to="/home">
-                <button>VOLVER A HOME</button>
+                <button className="btvolver">VOLVER A HOME</button>
         </Link>
         <div className="crear">
-            <h2 >CREAR ACTIVIDAD</h2>
+            <div className="titulocrear">
+            <h2 >CREAR TOUR</h2>
+            </div>
+
             <form className="formulario" onSubmit={handlerSubmit}>
+            <div>
                 <div>
                     <label>Nombre: </label>
-                    <input className="inputTour" value={form.name} key="name" type="text" onChange={changeName}/>
+                    <input required className="inputTour" value={form.name} key="name" type="text" onChange={changeName}/>
+                    {errors.name &&<p className="danger">{errors.name}</p>}
                 </div>
                 <div>
-                    <label>Dificultad: </label>
-                    <input className="inputTour" value={form.difficulty} key="difficulty" type="number" min={1} max={5} onChange={changeDifficulty}/>
+                    <label htmlFor="dificultad">Dificultad: </label>
+                    {
+                        <select id="dificultad" onChange={changeDifficulty} >
+                        <option> Seleccione 1 </option>
+                        {
+                        difficulties.map( (d)=>
+                            <option value={d}> {capitalizeFirstLetter(d)} </option>
+                        )
+                        }
+                     </select>
+                        
+                    }
                 </div>
                 <div>
                     <label>Duracion: </label>
-                    <input className="inputTour" value={form.duration} key="duration" type="text" onChange={changeDuration}/>
+                    <input required className="inputTour" value={form.duration} key="duration" type="text" onChange={changeDuration}/>
                 </div>
                 <div>
-                    <label>Estacion: </label>
-                    <input className="inputTour" value={form.season} key="season" type="text" onChange={changeSeason}/>
+                    <label htmlFor="estacion">Estacion: </label>
+                     <select id="estacion" onChange={changeSeason} >
+                        <option> Seleccione 1 </option>
+                        {
+                        season.map( (s)=>
+                            <option value={s}> {capitalizeFirstLetter(s)} </option>
+                        )
+                        }
+                     </select>
                 </div>
                 <div>
                     <label htmlFor="pais">Seleccione 1 o mas paises</label>
@@ -158,7 +187,10 @@ const CreateTour = ()=> {
                         }
                     </div>
                 </div>
-                <button className="btnEnviar" type="submit" disable={!form.name || !form.difficulty || !form.duration || !form.season || !form.countries.length}>CREAR TOUR</button>
+                <button className="btnEnviar" type="submit" disabled={errors.name  || !form.name || !form.difficulty || !form.duration || !form.season || !form.countries.length}>CREAR TOUR</button>
+                {(errors.name  || !form.name || !form.difficulty || !form.duration || !form.season || !form.countries.length) && 
+                    <p className="danger">Botón deshabilitado, uno o más campos están vacíos</p>}
+            </div>
             </form>
         </div>
         </div>

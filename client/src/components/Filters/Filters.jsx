@@ -1,7 +1,7 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import { useEffect } from "react";
-import { filterByContinente, filterAlfabetico, getTours,filterByTours } from "../../redux/actions";
+import { filterByContinente, filterAlfabetico, getTours,filterByTours, filterByPoblacion } from "../../redux/actions";
 import "./Filters.css";
 
 const Filter = () =>{
@@ -22,7 +22,12 @@ const Filter = () =>{
 
     const handlerFilterAlfabetico = (e) =>{
         dispatch (filterAlfabetico (e.target.value))
-    } ;
+    };
+
+    const handlerFilterPoblacion = (e) =>{
+        dispatch (filterByPoblacion (e.target.value))
+    }
+
     return (
         <div className="filter">
                 <label htmlFor="alfabetico">Orden alfabetico:</label>
@@ -31,8 +36,8 @@ const Filter = () =>{
                     <option value="az">A-Z</option>
                     <option value="za">Z-A</option>
                 </select>
-                <label htmlFor="poblacion">Pablacion:</label>
-                <select id="poblacion">
+                <label htmlFor="poblacion">Poblacion:</label>
+                <select id="poblacion" onChange={handlerFilterPoblacion}>
                     <option value="tod">Seleccionar</option>
                     <option value="az">Menor a Mayor</option>
                     <option value="za">Mayor a Menor</option>

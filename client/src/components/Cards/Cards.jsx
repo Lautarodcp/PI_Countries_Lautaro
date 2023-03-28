@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import { getCountries } from "../../redux/actions";
 import "./Cards.css";
 import Pagination from "../Pagination/Pagination";
+import Nav from "../Nav/Nav";
 
 const Cards = () => {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Cards = () => {
 
     useEffect (()=> {
         dispatch(getCountries())
-    }, [dispatch]);
+    }, []);
 
     if (currentCountry.length!=0) {    
     return(
@@ -47,8 +48,8 @@ const Cards = () => {
         </div>
     )} else {
         return(
-            <div className="error">
-                <h2 className="titulo">NO HAY PAISES, VUELVA A CARGAR TODOS</h2>
+            <div className="diverror">
+                <img src="https://cdn.memegenerator.es/descargar/2812090" alt="" />
             </div>
         )
     };

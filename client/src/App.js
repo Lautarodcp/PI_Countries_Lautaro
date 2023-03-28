@@ -15,9 +15,6 @@ function App() {
       <Route exact path="/">
         <Landig/>
       </Route>
-      <Route exact path="/home/nav">
-        <Nav/>
-      </Route>
       <Route exact path="/home">
         <Home/>
       </Route>
@@ -26,9 +23,6 @@ function App() {
       </Route>
       <Route exact path="/home/create">
         <CreateTour/>
-      </Route>
-      <Route exact path="/home/paginadoo">
-        <Pagination/>
       </Route>
     </div>
     </BrowserRouter>
