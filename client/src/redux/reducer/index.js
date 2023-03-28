@@ -10,63 +10,35 @@ import { FILTER_POBLACION } from "../actions";
 const initialState = {
     allcountries: [],
     countries: [],
-    tours: []
+    tours: [],
+    filtros: 1
 }
 
 const ordenar = (country, dato) => {
     switch (dato) {
-        case "tod":
-            return country;
-        case "az": 
-        country.sort(function (a, b) {
-            let countrya = a.name.toUpperCase();
-            let countryb = b.name.toUpperCase();
-            if (countrya < countryb) {return -1};
-            if (countrya > countryb) {return 1};
-            return 0;
-        });
-             break;
-        case "za": 
-        country.sort(function (a, b) {
-            let countrya = a.name.toUpperCase();
-            let countryb = b.name.toUpperCase();
-            if (countrya < countryb) {return 1};
-            if (countrya > countryb) {return -1};
-            return 0;
-    });
-    break;
-        default:
-            return 1;
-        };
-    return country;
+      case "tod":
+        return 3;
+      case "az": 
+        return country.sort((a, b) => a.name.localeCompare(b.name));
+      case "za": 
+      return country.sort((a, b) => b.name.localeCompare(a.name));
+      default:
+        return country;
+    };
 };
 
 const ordenarPoblacion = (country, dato) => {
+    console.log(country);
     switch (dato) {
         case "tod":
-            return country;
+          return 3;
         case "az": 
-        country.sort(function (a, b) {
-            let countrya = a.population;
-            let countryb = b.population;
-            if (countrya < countryb) {return -1};
-            if (countrya > countryb) {return 1};
-            return 0;
-        });
-             break;
+          return country.sort((a, b) => a.population - b.population);
         case "za": 
-        country.sort(function (a, b) {
-            let countrya = a.population;
-            let countryb = b.population;
-            if (countrya < countryb) {return 1};
-            if (countrya > countryb) {return -1};
-            return 0;
-    });
-    break;
+        return country.sort((a, b) => b.population - a.population);
         default:
-            return 1;
-        };
-    return country;
+          return country;
+      };
 };
 
 
@@ -86,13 +58,13 @@ const rootReducer = (state=initialState, action) => {
             allcountries.filter(c=> c.continent === action.payload)
             return {...state, countries:filterContinente};
         case FILTER_ALFABETICO:
-            let allCountriesAlfabetico = state.allcountries;
-            let countriesAlfabet = ordenar(allCountriesAlfabetico, action.payload);
-            return {...state, countries: countriesAlfabet};
+            let allCountriesAlfabetico = state.countries;
+            let result = ordenar(allCountriesAlfabetico, action.payload);
+            return {...state, countries: result, filtros: state.filtros+1};
         case FILTER_POBLACION:
                 let allCountriesPoblacion = state.countries;
-                let countriesPoblacion = ordenarPoblacion(allCountriesPoblacion, action.payload)
-                return {...state, countries: countriesPoblacion};
+                let resultado = ordenarPoblacion(allCountriesPoblacion, action.payload)
+                return {...state, countries: resultado, filtros: state.filtros+1};
         case FILTER_TOURS:
             let allcountriesTours = state.allcountries;
             let filterTours = action.payload === "todos"?

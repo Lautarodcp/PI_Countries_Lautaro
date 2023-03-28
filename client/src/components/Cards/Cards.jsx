@@ -5,11 +5,11 @@ import {useEffect, useState} from "react";
 import { getCountries } from "../../redux/actions";
 import "./Cards.css";
 import Pagination from "../Pagination/Pagination";
-import Nav from "../Nav/Nav";
 
 const Cards = () => {
     const dispatch = useDispatch();
     const allCountries = useSelector ((state) => state.countries);
+    const filtroaplicado = useSelector((state)=> state.filtros);
     
     const [currentPage, setCurrentPage] = useState(1); // pagina actual
     const [countryPerPage, setCountryPerPage] = useState(10); //paises x pagina
@@ -25,6 +25,10 @@ const Cards = () => {
         dispatch(getCountries())
     }, []);
 
+    useEffect (()=>{
+
+    },[filtroaplicado]);
+    
     if (currentCountry.length!=0) {    
     return(
         <div className="cards">

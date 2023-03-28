@@ -1,6 +1,6 @@
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { filterByContinente, filterAlfabetico, getTours,filterByTours, filterByPoblacion } from "../../redux/actions";
 import "./Filters.css";
 
@@ -21,7 +21,7 @@ const Filter = () =>{
     };
 
     const handlerFilterAlfabetico = (e) =>{
-        dispatch (filterAlfabetico (e.target.value))
+            dispatch (filterAlfabetico (e.target.value));
     };
 
     const handlerFilterPoblacion = (e) =>{
