@@ -28,7 +28,7 @@ const Cards = () => {
     useEffect (()=>{
 
     },[filtroaplicado]);
-    
+
     if (currentCountry.length!=0) {    
     return(
         <div className="cards">

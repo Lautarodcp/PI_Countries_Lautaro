@@ -42,6 +42,7 @@ const CreateTour = ()=> {
     const alfabeticCountri= ordenar(allCountries,orden);
     const difficulties = ["1", "2", "3", "4","5"];
     const season = ["verano", "otoño", "invierno", "primavera"];
+    const duracion = ["1 hora", "2 horas", "3 horas", "4 horas", "5 horas", "6 horas", "7 horas", "8 horas", "Todo el dia"];
    
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.substring(1);
@@ -133,7 +134,7 @@ const CreateTour = ()=> {
             </div>
 
             <form className="formulario" onSubmit={handlerSubmit}>
-            <div>
+            <div className="probando">
                 <div>
                     <label>Nombre: </label>
                     <input required className="inputTour" value={form.name} key="name" type="text" onChange={changeName}/>
@@ -154,8 +155,15 @@ const CreateTour = ()=> {
                     }
                 </div>
                 <div>
-                    <label>Duracion: </label>
-                    <input required className="inputTour" value={form.duration} key="duration" type="text" onChange={changeDuration}/>
+                    <label htmlFor="inputTour" >Duracion: </label>
+                    <select id="inputTour" onChange={changeDuration}>
+                    <option>Seleccione 1 </option>
+                    {
+                        duracion.map((horas)=>
+                        <option value={horas}> {horas} </option>
+                        )
+                    }
+                    </select>
                 </div>
                 <div>
                     <label htmlFor="estacion">Estacion: </label>
@@ -169,8 +177,9 @@ const CreateTour = ()=> {
                      </select>
                 </div>
                 <div>
-                    <label htmlFor="pais">Seleccione 1 o mas paises</label>
+                    <label htmlFor="pais"> Paises: </label>
                     <select id="pais" onChange={handlerSelectCountry}>
+                        <option> Seleccione 1 o mas </option>
                      {
                         alfabeticCountri.map((c)=> 
                              <option value={c.name}> {capitalizeFirstLetter(c.name)} </option>

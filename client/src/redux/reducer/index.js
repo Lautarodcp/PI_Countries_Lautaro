@@ -45,7 +45,7 @@ const ordenarPoblacion = (country, dato) => {
 const rootReducer = (state=initialState, action) => {
     switch (action.type) {
         case GET_COUNTRIES:
-            return {...state, countries:action.payload, allcountries:action.payload};
+            return {...state, countries:action.payload, allcountries:action.payload,};
         case GET_COUNTRY_NAME:
             return {...state, countries:action.payload};
         case GET_TOURS:
@@ -60,11 +60,18 @@ const rootReducer = (state=initialState, action) => {
         case FILTER_ALFABETICO:
             let allCountriesAlfabetico = state.countries;
             let result = ordenar(allCountriesAlfabetico, action.payload);
-            return {...state, countries: result, filtros: state.filtros+1};
+            if(result===3){
+                return {...state, countries:allCountriesAlfabetico, filtros: state.filtros+1}
+            } else {
+                return {...state, countries: result, filtros: state.filtros+1}};
         case FILTER_POBLACION:
                 let allCountriesPoblacion = state.countries;
                 let resultado = ordenarPoblacion(allCountriesPoblacion, action.payload)
-                return {...state, countries: resultado, filtros: state.filtros+1};
+                if(resultado===3){
+                    return {...state, countries:allCountriesPoblacion, filtros: state.filtros+1}
+                } else {
+                return {...state, countries: resultado, filtros: state.filtros+1}
+            };
         case FILTER_TOURS:
             let allcountriesTours = state.allcountries;
             let filterTours = action.payload === "todos"?

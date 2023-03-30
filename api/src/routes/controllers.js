@@ -9,11 +9,11 @@ const getApi = async function () {
     const countries = await info.data.map (country => {
         return {
             id:country.cca3,
-            name:country.name.common.toLowerCase(),
+            name:country.name.common.toLowerCase(),//paso todo a minusculas por las dudas
             flag:country.flags[1],
             continent:country.continents[0],
-            capital: country.capital? country.capital[0]:"None",
-            subregion: country.subregion?country.subregion:"None",
+            capital: country.capital? country.capital[0]:"None",//para los paises que no tienen
+            subregion: country.subregion?country.subregion:"None",//para los paises que no tienen
             area:country.area,
             population:country.population,
         };
@@ -25,8 +25,8 @@ const getApi = async function () {
 
 const createDb = async function () {
     const countries = await getApi();
-    countries.forEach (c => {
-        Country.findOrCreate ({
+    countries.forEach (c => {       //itero sobre cada uno
+        Country.findOrCreate ({     //busca y sino crea
             where: {
                     id:c.id,
                     name:c.name, 
@@ -95,7 +95,6 @@ const findCountriesbyId = (id, countries) => {
 //CREAR TOURS
 
 const addTourtoCountry = async (name, difficulty, duration, season, countries) => {
-    try {
       const newTour = await Tours.create({
         name,
         difficulty,
@@ -110,12 +109,9 @@ const addTourtoCountry = async (name, difficulty, duration, season, countries) =
       });
   
       filter.forEach(async (country) => {
-        await newTour.addCountry(country, { through: "country_tours" });
+        await newTour.addCountry(country, { through: "country_tours" });// agrego la relacion
       });
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    };
 
 //BORRAR TOURS
 

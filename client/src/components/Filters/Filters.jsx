@@ -5,8 +5,12 @@ import { filterByContinente, filterAlfabetico, getTours,filterByTours, filterByP
 import "./Filters.css";
 
 const Filter = () =>{
+    const ordenar = (palabra) => {
+            return palabra.sort((a, b) => a.name.localeCompare(b.name));
+    };
+
     const dispatch = useDispatch();
-    const allTours = useSelector ((state) => state.tours);
+    const allTours = ordenar(useSelector ((state) => state.tours));
 
     useEffect (()=> {
         dispatch(getTours())
@@ -32,7 +36,7 @@ const Filter = () =>{
         <div className="filter">
                 <label htmlFor="alfabetico">Orden alfabetico:</label>
                 <select id="alfabetico" onChange={handlerFilterAlfabetico}>
-                    <option value="tod">Seleccionar</option>
+                    <option selected value="tod">Seleccionar</option>
                     <option value="az">A-Z</option>
                     <option value="za">Z-A</option>
                 </select>
@@ -46,7 +50,7 @@ const Filter = () =>{
                 <select id="continente" onChange={handlerFilterContinent}>
                     <option value="tod">Todos</option>
                     <option value="Africa">Africa</option>
-                    <option value="Antartica">Antartica</option>
+                    <option value="Antarctica">Antartica</option>
                     <option value="Asia">Asia</option>
                     <option value="Europe">Europa</option>
                     <option value="North America">America del Norte</option>
